@@ -1,9 +1,20 @@
 .table {
+  padding: 20px;
+  width: 900px;
+
   .item {
     display: flex;
   }
 
   .name {
     width: 200px;
+  }
+
+  .job, .EP, .GP, .PR, .priority {
+    width: 120px;
+  }
+
+  .attendance {
+    width: 140px;
   }
 }

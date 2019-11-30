@@ -39,8 +39,18 @@ export default class Index extends Component {
               <View className="priority">优先级</View>
             </View>
             {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 1, 1, 1, 1].map(
-              item => {
-                return <View className="item"></View>;
+              (item, index) => {
+                return (
+                  <View className="item">
+                    <View className="name">炸窝{index}</View>
+                    <View className="job">战士</View>
+                    <View className="attendance">100%</View>
+                    <View className="EP">EP</View>
+                    <View className="GP">GP</View>
+                    <View className="PR">PR</View>
+                <View className="priority">{index}</View>
+                  </View>
+                );
               }
             )}
           </View>
