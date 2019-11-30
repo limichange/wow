@@ -1,11 +1,8 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
-import './index.scss'
-
-import Login from '../../components/login/index'
+import Taro, { Component, Config } from "@tarojs/taro";
+import { View, ScrollView } from "@tarojs/components";
+import "./index.scss";
 
 export default class Index extends Component {
-
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -14,24 +11,41 @@ export default class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '首页'
-  }
+    navigationBarTitleText: "首页"
+  };
 
-  componentWillMount () { }
+  componentWillMount() {}
 
-  componentDidMount () { }
+  componentDidMount() {}
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () { }
+  componentDidShow() {}
 
-  componentDidHide () { }
+  componentDidHide() {}
 
-  render () {
+  render() {
     return (
-      <View className='index'>
-        <Login/>
+      <View className="index">
+        <ScrollView scrollX={true}>
+          <View className="table">
+            <View className="item">
+              <View className="name">名字</View>
+              <View className="job">职业</View>
+              <View className="attendance">出勤率</View>
+              <View className="EP">EP</View>
+              <View className="GP">GP</View>
+              <View className="PR">PR</View>
+              <View className="priority">优先级</View>
+            </View>
+            {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 1, 1, 1, 1].map(
+              item => {
+                return <View className="item"></View>;
+              }
+            )}
+          </View>
+        </ScrollView>
       </View>
-    )
+    );
   }
 }

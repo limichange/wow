@@ -3,7 +3,7 @@
   "cloudfunctionRoot": "cloud/functions/",
   "projectname": "wow",
   "description": "wow",
-  "appid": "touristappid",
+  "appid": "wx1541b5e3df0af180",
   "setting": {
     "urlCheck": true,
     "es6": false,
