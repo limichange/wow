@@ -11,7 +11,7 @@ export default class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: "首页"
+    navigationBarTitleText: "首页",
   };
 
   componentWillMount() {}
@@ -23,6 +23,10 @@ export default class Index extends Component {
   componentDidShow() {}
 
   componentDidHide() {}
+
+  onShareAppMessage() {
+    return {}
+  }
 
   render() {
     const a = Array(1000).fill(1, 0, 1000);
