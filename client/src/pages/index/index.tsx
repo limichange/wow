@@ -52,15 +52,15 @@ export default class Index extends Component<any, any> {
     return (
       <View className="index">
         <View className="search">
-          搜索
           <Input
+            placeholder="搜索"
             onInput={this.searchInputInput}
             className="searchInput"
           ></Input>
         </View>
         <ScrollView scrollX={true}>
           <View className="table">
-            <View className="item">
+            <View className="item header">
               <View className="name">名字</View>
               <View className="job">职业</View>
               <View className="EP">EP</View>

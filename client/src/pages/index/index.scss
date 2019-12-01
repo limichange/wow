@@ -1,13 +1,15 @@
 .table {
-  padding: 20px;
-  width: 1000px;
+  width: 900px;
 
   .item {
     display: flex;
+    font-size: 34px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e8e8e8;
   }
 
   .name {
-    width: 300px;
+    width: 260px;
   }
 
   .job {
@@ -15,22 +17,29 @@
   }
   
   .EP, .GP, .PR, .priority {
-    width: 140px;
+    width: 120px;
   }
 
   .attendance {
     width: 200px;
   }
+
+  .header {
+    background: #FAFAFA;
+    color: rgba(0,0,0,0.85);
+    font-weight: 500;
+  }
 }
 
 .search {
-
-  padding: 20px;
   display: flex;
   align-items: center;
+  padding: 20px;
 
   .searchInput {
-    margin-left: 20px;
-    border: 1px solid gray;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #EDEDED;
+    border-radius: 5px;
   }
 }
