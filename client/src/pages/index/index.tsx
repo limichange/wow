@@ -63,22 +63,18 @@ export default class Index extends Component<any, any> {
             <View className="item">
               <View className="name">名字</View>
               <View className="job">职业</View>
-              <View className="attendance">出勤率</View>
               <View className="EP">EP</View>
               <View className="GP">GP</View>
               <View className="PR">PR</View>
-              <View className="priority">优先级</View>
             </View>
             {a.map((item, index) => {
               return (
                 <View key={index} className="item">
                   <View className="name">{item[0]}</View>
                   <View className="job">{item[1]}</View>
-                  <View className="attendance">100%</View>
                   <View className="EP">{item[2]}</View>
                   <View className="GP">{item[3]}</View>
                   <View className="PR">{item[4]}</View>
-                  <View className="priority">{index}</View>
                 </View>
               );
             })}
