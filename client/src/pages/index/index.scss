@@ -1,20 +1,36 @@
 .table {
   padding: 20px;
-  width: 900px;
+  width: 1200px;
 
   .item {
     display: flex;
   }
 
   .name {
-    width: 200px;
+    width: 300px;
   }
 
-  .job, .EP, .GP, .PR, .priority {
-    width: 120px;
+  .job {
+    width: 200px;
+  }
+  
+  .EP, .GP, .PR, .priority {
+    width: 140px;
   }
 
   .attendance {
-    width: 140px;
+    width: 200px;
+  }
+}
+
+.search {
+
+  padding: 20px;
+  display: flex;
+  align-items: center;
+
+  .searchInput {
+    margin-left: 20px;
+    border: 1px solid gray;
   }
 }
