@@ -13,7 +13,12 @@ export default class Index extends Component<any, any> {
     super(...arguments);
 
     this.state = {
-      searchInput: ""
+      searchInput: "",
+      sorts: {
+        EP: '',
+        GP: '',
+        PR: '',
+      }
     };
   }
 
@@ -28,7 +33,22 @@ export default class Index extends Component<any, any> {
   componentDidShow() {}
 
   updateSort = type => {
-    console.log(type);
+    this.setState(prev => {
+      const oldStatus = prev.sorts[type]
+      const newStatus = {
+        EP: '',
+        GP: '',
+        PR: '',
+      }
+
+      if(oldStatus === '') newStatus[type] = 'down'
+      else if(oldStatus === 'down') newStatus[type] = 'up'
+      else if(oldStatus === 'up') newStatus[type] = ''
+
+      return {
+        sorts: newStatus
+      }
+    })
   };
 
   onShareAppMessage() {
@@ -43,7 +63,7 @@ export default class Index extends Component<any, any> {
 
   render() {
     let a = this.data.filter(item => item[0]);
-    const { searchInput } = this.state;
+    const { searchInput, sorts } = this.state;
 
     if (searchInput) {
       a = a.filter(item => {
@@ -70,13 +90,13 @@ export default class Index extends Component<any, any> {
               <View className="name">名字</View>
               <View className="job">职业</View>
               <View onClick={() => this.updateSort("EP")} className="EP">
-                <Toggle type="down">EP</Toggle>
+                <Toggle type={sorts.EP}>EP</Toggle>
               </View>
               <View onClick={() => this.updateSort("GP")} className="GP">
-                <Toggle type="down">GP</Toggle>
+                <Toggle type={sorts.GP}>GP</Toggle>
               </View>
               <View onClick={() => this.updateSort("PR")} className="PR">
-                <Toggle type="down">PR</Toggle>
+                <Toggle type={sorts.PR}>PR</Toggle>
               </View>
             </View>
             {a.map((item, index) => {
