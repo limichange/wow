@@ -13,16 +13,16 @@ export default class Index extends Component<any, any> {
     super(...arguments);
 
     this.state = {
+      dataFormat: data.roster.filter(item => item.length === 5),
+      data: data.roster.filter(item => item.length === 5),
       searchInput: "",
       sorts: {
-        EP: '',
-        GP: '',
-        PR: '',
+        EP: "",
+        GP: "",
+        PR: ""
       }
     };
   }
-
-  data = data.roster;
 
   componentWillMount() {}
 
@@ -34,39 +34,42 @@ export default class Index extends Component<any, any> {
 
   updateSort = type => {
     this.setState(prev => {
-      const oldStatus = prev.sorts[type]
+      const oldStatus = prev.sorts[type];
       const newStatus = {
-        EP: '',
-        GP: '',
-        PR: '',
-      }
+        EP: "",
+        GP: "",
+        PR: ""
+      };
 
-      if(oldStatus === '') newStatus[type] = 'down'
-      else if(oldStatus === 'down') newStatus[type] = 'up'
-      else if(oldStatus === 'up') newStatus[type] = ''
+      if (oldStatus === "") newStatus[type] = "down";
+      else if (oldStatus === "down") newStatus[type] = "up";
+      else if (oldStatus === "up") newStatus[type] = "";
 
       return {
-        sorts: newStatus
-      }
-    })
+        sorts: newStatus,
+        dataFormat: this.sortData(prev.data)
+      };
+    });
   };
 
   onShareAppMessage() {
     return {};
   }
 
-  searchInputInput = e => {
-    this.setState({
-      searchInput: e.detail.value
-    });
-  };
+  sortData(data) {
+    const { sorts } = this.state
 
-  render() {
-    let a = this.data.filter(item => item[0]);
-    const { searchInput, sorts } = this.state;
+    return data.sort((x, y) => {
+      return x[2] - y[2]
+    })
+  }
+
+  searchInputInput = e => {
+    const searchInput = e.detail.value;
+    let dataFormat = this.state.data.filter(item => item[0]);
 
     if (searchInput) {
-      a = a.filter(item => {
+      dataFormat = dataFormat.filter(item => {
         return (
           item[0]
             .toLocaleLowerCase()
@@ -74,6 +77,14 @@ export default class Index extends Component<any, any> {
         );
       });
     }
+
+    this.setState({
+      dataFormat
+    });
+  };
+
+  render() {
+    const { sorts, dataFormat } = this.state;
 
     return (
       <View className="index">
@@ -99,7 +110,7 @@ export default class Index extends Component<any, any> {
                 <Toggle type={sorts.PR}>PR</Toggle>
               </View>
             </View>
-            {a.map((item, index) => {
+            {dataFormat.map((item, index) => {
               return (
                 <View key={index} className="item">
                   <View className="name">{item[0]}</View>
