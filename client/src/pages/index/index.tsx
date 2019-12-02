@@ -26,7 +26,9 @@ export default class Index extends Component<any, any> {
 
   componentWillMount() {}
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.updateSort('PR')
+  }
 
   componentWillUnmount() {}
 
@@ -47,7 +49,7 @@ export default class Index extends Component<any, any> {
 
       return {
         sorts: newStatus,
-        dataFormat: this.sortData(prev.data)
+        dataFormat: this.sortData(prev.data, newStatus)
       };
     });
   };
@@ -56,12 +58,31 @@ export default class Index extends Component<any, any> {
     return {};
   }
 
-  sortData(data) {
-    const { sorts } = this.state
+  sortData(data, sorts) {
+    let index = -1;
+    let sortType = "";
 
-    return data.sort((x, y) => {
-      return x[2] - y[2]
-    })
+    if (sorts["EP"]) {
+      (index = 2), (sortType = sorts["EP"]);
+    }
+    if (sorts["GP"]) {
+      (index = 3), (sortType = sorts["GP"]);
+    }
+    if (sorts["PR"]) {
+      (index = 4), (sortType = sorts["PR"]);
+    }
+
+    if (index === -1) return data;
+
+    if (sortType === "up")
+      return data.sort((x, y) => {
+        return x[index] - y[index];
+      });
+
+    if (sortType === "down")
+      return data.sort((x, y) => {
+        return y[index] - x[index];
+      });
   }
 
   searchInputInput = e => {
