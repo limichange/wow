@@ -1,10 +1,10 @@
 .table {
-  width: 900px;
+  width: 800px;
 
   .item {
     display: flex;
-    font-size: 34px;
-    padding: 10px 20px;
+    font-size: 30px;
+    padding: 6px 20px;
     border-bottom: 1px solid #e8e8e8;
   }
 
@@ -13,11 +13,11 @@
   }
 
   .job {
-    width: 200px;
+    width: 160px;
   }
   
   .EP, .GP, .PR, .priority {
-    width: 120px;
+    width: 110px;
   }
 
   .attendance {
