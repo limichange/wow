@@ -7,7 +7,7 @@ export default function Toggle(props) {
   if (props.type === "up") symbol = "↑";
 
   return (
-    <View onClick={props.onClick}>
+    <View>
       {props.children} {symbol}
     </View>
   );

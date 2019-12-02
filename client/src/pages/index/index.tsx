@@ -4,8 +4,6 @@ import data from "./data";
 import "./index.scss";
 import Toggle from "./Toggle";
 
-
-
 export default class Index extends Component<any, any> {
   config: Config = {
     navigationBarTitleText: "首页"
@@ -31,7 +29,6 @@ export default class Index extends Component<any, any> {
 
   updateSort = type => {
     console.log(type);
-    
   };
 
   onShareAppMessage() {
@@ -72,10 +69,14 @@ export default class Index extends Component<any, any> {
             <View className="item header">
               <View className="name">名字</View>
               <View className="job">职业</View>
-              <View className="EP">EP</View>
-              <View className="GP">GP ↑</View>
+              <View onClick={() => this.updateSort("EP")} className="EP">
+                <Toggle type="down">EP</Toggle>
+              </View>
+              <View onClick={() => this.updateSort("GP")} className="GP">
+                <Toggle type="down">GP</Toggle>
+              </View>
               <View onClick={() => this.updateSort("PR")} className="PR">
-                 <Toggle type="down">PR</Toggle>
+                <Toggle type="down">PR</Toggle>
               </View>
             </View>
             {a.map((item, index) => {
