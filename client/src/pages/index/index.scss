@@ -35,11 +35,12 @@
   display: flex;
   align-items: center;
   padding: 20px;
+  background: #EFEFF4;
 
   .searchInput {
     width: 100%;
     padding: 10px;
-    border: 1px solid #EDEDED;
-    border-radius: 5px;
+    border-radius: 8px;
+    background: #fff;
   }
 }

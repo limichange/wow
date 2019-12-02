@@ -1,7 +1,10 @@
 import Taro, { Component, Config } from "@tarojs/taro";
-import { View, ScrollView, Input } from "@tarojs/components";
+import { View, ScrollView, Input, Block } from "@tarojs/components";
 import data from "./data";
 import "./index.scss";
+import Toggle from "./Toggle";
+
+
 
 export default class Index extends Component<any, any> {
   config: Config = {
@@ -26,7 +29,10 @@ export default class Index extends Component<any, any> {
 
   componentDidShow() {}
 
-  componentDidHide() {}
+  updateSort = type => {
+    console.log(type);
+    
+  };
 
   onShareAppMessage() {
     return {};
@@ -41,12 +47,15 @@ export default class Index extends Component<any, any> {
   render() {
     let a = this.data.filter(item => item[0]);
     const { searchInput } = this.state;
-    console.log(searchInput);
 
     if (searchInput) {
       a = a.filter(item => {
-        return item[0].toLocaleLowerCase().indexOf(searchInput.toLocaleLowerCase()) !== -1
-      })
+        return (
+          item[0]
+            .toLocaleLowerCase()
+            .indexOf(searchInput.toLocaleLowerCase()) !== -1
+        );
+      });
     }
 
     return (
@@ -64,8 +73,10 @@ export default class Index extends Component<any, any> {
               <View className="name">名字</View>
               <View className="job">职业</View>
               <View className="EP">EP</View>
-              <View className="GP">GP</View>
-              <View className="PR">PR</View>
+              <View className="GP">GP ↑</View>
+              <View onClick={() => this.updateSort("PR")} className="PR">
+                 <Toggle type="down">PR</Toggle>
+              </View>
             </View>
             {a.map((item, index) => {
               return (
