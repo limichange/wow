@@ -1,4 +1,4 @@
-import { View, Textarea } from "@tarojs/components";
+import { View, Textarea, Button } from "@tarojs/components";
 import { useState } from "@tarojs/taro";
 import JSON5 from "json5";
 import "./index.scss";
@@ -49,6 +49,7 @@ export default function ImportPage() {
         onInput={onTextareaUpdate}
       ></Textarea>
       {textareaValueError && <View className="error">数据格式错误</View>}
+      <Button>保存</Button>
     </View>
   );
 }
