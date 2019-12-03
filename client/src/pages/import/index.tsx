@@ -36,6 +36,8 @@ export default function ImportPage() {
   return (
     <View>
       <Textarea
+        className="textarea"
+        placeholder="输入数据格式"
         showConfirmBar={true}
         maxlength={-1}
         value={textareaValue}
