@@ -22,7 +22,7 @@ export default function ImportPage() {
   }
 
   function saveData() {
-    if (textareaValueError) return;
+    if (textareaValueError || JSON.stringify(data) === "{}") return;
 
     Taro.cloud
       .database()
