@@ -4,8 +4,8 @@ import JSON5 from "json5";
 import "./index.scss";
 
 export default function ImportPage() {
-  const [data, setData] = useState([]);
-  const [textareaValue, setTextareaValue] = useState({});
+  const [data, setData] = useState({});
+  const [textareaValue, setTextareaValue] = useState("");
   const [textareaValueError, setTextareaValueError] = useState<boolean>(false);
 
   function onTextareaUpdate(e) {
@@ -15,15 +15,15 @@ export default function ImportPage() {
     setTextareaValueError(false);
 
     try {
-      const valueJSON = JSON5.parse(value);
-
-      setData(valueJSON);
+      setData(JSON5.parse(value));
     } catch (e) {
       setTextareaValueError(true);
     }
   }
 
   function saveData() {
+    if (textareaValueError) return;
+
     Taro.cloud
       .database()
       .collection("data")
