@@ -1,8 +1,18 @@
-import { View } from "@tarojs/components";
+import { View, Textarea } from "@tarojs/components";
 import { useState } from "@tarojs/taro";
 
 export default function ImportPage() {
   const [data, setData] = useState([]);
+  const [textareaValue, setTextareaValue] = useState('');
 
-  return <View>import page {data.length}</View>;
+  function onTextareaUpdate(e) {
+    setTextareaValue(e.detail.value)
+  }
+
+  return (
+    <View>
+      <Textarea value={textareaValue} onInput={onTextareaUpdate}></Textarea>
+      import page {textareaValue}
+    </View>
+  );
 }
