@@ -26,20 +26,18 @@ export default class Index extends Component<any, any> {
 
   componentWillMount() {}
 
-  async componentDidMount() {
-
-
-    const a = await Taro.cloud
+  componentDidMount() {
+    Taro.cloud
       .database()
       .collection("data")
       .where({})
-      .get()
+      .get({
+        success(res) {
+          console.log(res);
+        }
+      });
 
-console.log(a);
-
-
-      this.updateSort('PR')
-    
+    this.updateSort("PR");
   }
 
   componentWillUnmount() {}
