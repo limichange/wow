@@ -49,7 +49,7 @@ export default function ImportPage() {
         onInput={onTextareaUpdate}
       ></Textarea>
       {textareaValueError && <View className="error">数据格式错误</View>}
-      <Button>保存</Button>
+      <Button onClick={saveData}>保存</Button>
     </View>
   );
 }
