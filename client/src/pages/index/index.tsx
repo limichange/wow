@@ -1,6 +1,5 @@
 import Taro, { Component, Config } from "@tarojs/taro";
 import { View, ScrollView, Input, Block } from "@tarojs/components";
-import data from "./data";
 import "./index.scss";
 import Toggle from "./Toggle";
 
@@ -13,8 +12,8 @@ export default class Index extends Component<any, any> {
     super(...arguments);
 
     this.state = {
-      dataFormat: data.roster.filter(item => item.length === 5),
-      data: data.roster.filter(item => item.length === 5),
+      data: [],
+      dataFormat: [],
       searchInput: "",
       sorts: {
         EP: "",
@@ -26,19 +25,30 @@ export default class Index extends Component<any, any> {
 
   componentWillMount() {}
 
-  componentDidMount() {
+  componentDidMount = () => {
     Taro.cloud
       .database()
       .collection("data")
+      .orderBy("date", "desc")
       .where({})
       .get({
-        success(res) {
-          console.log(res);
+        success: (res) => {
+          const data = res.data[0].data.roster.filter(
+            item => item.length === 5
+          );
+
+          this.setState(
+            {
+              data,
+              dataFormat: data
+            },
+            () => {
+              this.updateSort("PR");
+            }
+          );
         }
       });
-
-    this.updateSort("PR");
-  }
+  };
 
   componentWillUnmount() {}
 
