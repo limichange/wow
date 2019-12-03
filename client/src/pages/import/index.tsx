@@ -1,10 +1,11 @@
 import { View, Textarea } from "@tarojs/components";
 import { useState } from "@tarojs/taro";
+import JSON5 from "json5";
 import "./index.scss";
 
 export default function ImportPage() {
   const [data, setData] = useState([]);
-  const [textareaValue, setTextareaValue] = useState("");
+  const [textareaValue, setTextareaValue] = useState({});
   const [textareaValueError, setTextareaValueError] = useState<boolean>(false);
 
   function onTextareaUpdate(e) {
@@ -14,23 +15,27 @@ export default function ImportPage() {
     setTextareaValueError(false);
 
     try {
-      JSON.parse(value);
+      const valueJSON = JSON5.parse(value);
 
-      Taro.cloud
-        .database()
-        .collection("data")
-        .add({
-          data: {
-            value,
-            date: new Date()
-          },
-          success: function(res) {
-            console.log(res);
-          }
-        });
+      setData(valueJSON);
     } catch (e) {
       setTextareaValueError(true);
     }
+  }
+
+  function saveData() {
+    Taro.cloud
+      .database()
+      .collection("data")
+      .add({
+        data: {
+          data,
+          date: new Date()
+        },
+        success: function(res) {
+          console.log(res);
+        }
+      });
   }
 
   return (
