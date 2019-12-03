@@ -5,16 +5,29 @@ import "./index.scss";
 export default function ImportPage() {
   const [data, setData] = useState([]);
   const [textareaValue, setTextareaValue] = useState("");
-  const [textareaValueError, setTextareaValueError] = useState(false);
+  const [textareaValueError, setTextareaValueError] = useState<boolean>(false);
 
   function onTextareaUpdate(e) {
-    const value = e.detail.value;
+    const value = e.detail.value.trim();
 
     setTextareaValue(e.detail.value);
     setTextareaValueError(false);
 
     try {
       JSON.parse(value);
+
+      Taro.cloud
+        .database()
+        .collection("data")
+        .add({
+          data: {
+            value,
+            date: new Date()
+          },
+          success: function(res) {
+            console.log(res);
+          }
+        });
     } catch (e) {
       setTextareaValueError(true);
     }
@@ -22,7 +35,12 @@ export default function ImportPage() {
 
   return (
     <View>
-      <Textarea value={textareaValue} onInput={onTextareaUpdate}></Textarea>
+      <Textarea
+        showConfirmBar={true}
+        maxlength={-1}
+        value={textareaValue}
+        onInput={onTextareaUpdate}
+      ></Textarea>
       {textareaValueError && <View className="error">数据格式错误</View>}
     </View>
   );
