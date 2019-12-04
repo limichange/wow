@@ -3,7 +3,7 @@ import { useState, useEffect } from "@tarojs/taro";
 import "./index.scss";
 import RangePicker from "./RanagePicker";
 
-export default function Filter() {
+export default function Filter(props: { onChange: Function }) {
   const [pickerType1, setPickerType1] = useState(0);
   const [pickerType2, setPickerType2] = useState(0);
   const [numberString, setNumberString] = useState("");
@@ -11,9 +11,9 @@ export default function Filter() {
   const range2 = ["大于", "等于", "小于"];
 
   useEffect(() => {
-    console.log(pickerType1, pickerType2, numberString);
-
     if (numberString === "") return;
+
+    props.onChange([pickerType1, pickerType2, numberString]);
   });
 
   function clear() {

@@ -125,6 +125,11 @@ export default class Index extends Component<any, any> {
     });
   };
 
+  filterOnChange = (e) => {
+    console.log(e);
+    
+  }
+
   render() {
     const { sorts, dataFormat } = this.state;
 
@@ -137,7 +142,7 @@ export default class Index extends Component<any, any> {
             className="searchInput"
           ></Input>
         </View>
-        <Filter></Filter>
+        <Filter onChange={this.filterOnChange}></Filter>
         <ScrollView scrollX={true}>
           <View className="table">
             <View className="item header">
