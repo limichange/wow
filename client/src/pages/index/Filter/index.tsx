@@ -12,7 +12,13 @@ export default function Filter() {
 
   useEffect(() => {
     console.log(pickerType1, pickerType2, numberString);
+
+    if (numberString === '') return
   });
+
+  function clear() {
+    setNumberString('')
+  }
 
   return (
     <View className="filter">
@@ -22,10 +28,11 @@ export default function Filter() {
       <Input
         placeholder="输入数值"
         type="number"
+        value={numberString}
         onInput={e => setNumberString(e.detail.value)}
       ></Input>
 
-      <View className="cancel">×</View>
+      <View onClick={clear} className="cancel">×</View>
     </View>
   );
 }
