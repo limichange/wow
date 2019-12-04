@@ -133,7 +133,7 @@ export default class Index extends Component<any, any> {
 
     if (!number) return;
 
-    const dataFormat = this.state.dataFormat.filter(item => {
+    const dataFormat = this.state.data.filter(item => {
       let value = item[type1 + 2];
 
       if (type2 === 0) {
