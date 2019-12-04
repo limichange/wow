@@ -13,11 +13,11 @@ export default function Filter() {
   useEffect(() => {
     console.log(pickerType1, pickerType2, numberString);
 
-    if (numberString === '') return
+    if (numberString === "") return;
   });
 
   function clear() {
-    setNumberString('')
+    setNumberString("");
   }
 
   return (
@@ -32,7 +32,11 @@ export default function Filter() {
         onInput={e => setNumberString(e.detail.value)}
       ></Input>
 
-      <View onClick={clear} className="cancel">×</View>
+      {numberString && (
+        <View onClick={clear} className="cancel">
+          ×
+        </View>
+      )}
     </View>
   );
 }
