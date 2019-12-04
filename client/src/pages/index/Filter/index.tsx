@@ -1,5 +1,6 @@
 import { View, Picker, Input } from "@tarojs/components";
 import { useState } from "@tarojs/taro";
+import './index.scss'
 
 export default function Filter() {
   const [pickerType1, setPickerType1] = useState(0);
@@ -15,7 +16,7 @@ export default function Filter() {
         value={pickerType1}
         range={range1}
       >
-        {pickerType1}
+        {range1[pickerType1]}
       </Picker>
       <Picker
         onChange={e => setPickerType2(e.detail.value)}
@@ -23,9 +24,9 @@ export default function Filter() {
         value={pickerType2}
         range={range2}
       >
-        {pickerType2}
+        {range2[pickerType2]}
       </Picker>
-      <Input type="number"></Input>
+      <Input placeholder="输入数值" type="number"></Input>
 
       <View className="cancel">×</View>
     </View>
