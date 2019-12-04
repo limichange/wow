@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from "@tarojs/taro";
-import { View, ScrollView, Input, Block } from "@tarojs/components";
+import { View, ScrollView, Input, Block, Picker } from "@tarojs/components";
 import "./index.scss";
 import Toggle from "./Toggle";
 
@@ -32,7 +32,7 @@ export default class Index extends Component<any, any> {
       .orderBy("date", "desc")
       .where({})
       .get({
-        success: (res) => {
+        success: res => {
           const data = res.data[0].data.roster.filter(
             item => item.length === 5
           );
@@ -135,6 +135,27 @@ export default class Index extends Component<any, any> {
             onInput={this.searchInputInput}
             className="searchInput"
           ></Input>
+        </View>
+        <View className="filter">
+          <Picker
+            onChange={() => {}}
+            mode="selector"
+            value={0}
+            range={["EP", "GP", "PR"]}
+          >
+            EP
+          </Picker>
+          <Picker
+            onChange={() => {}}
+            mode="selector"
+            value={0}
+            range={["大于", "等于", "小于"]}
+          >
+            大于
+          </Picker>
+          <Input type="number"></Input>
+          
+          <View className="cancel">×</View>
         </View>
         <ScrollView scrollX={true}>
           <View className="table">
