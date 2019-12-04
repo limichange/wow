@@ -125,10 +125,30 @@ export default class Index extends Component<any, any> {
     });
   };
 
-  filterOnChange = (e) => {
-    console.log(e);
+  filterOnChange = e => {
+    const [type1, type2, number] = e;
+
+    console.log(type1, type2, number);
     
-  }
+
+    if (!number) return;
+
+    const dataFormat = this.state.dataFormat.filter(item => {
+      let value = item[type1 + 2];
+
+      if (type2 === 0) {
+        return value > (number);
+      } else if (type2 === 1) {
+        return (value = (number));
+      } else if (type2 === 2) {
+        return value < (number);
+      }
+    });
+
+    this.setState({
+      dataFormat
+    })
+  };
 
   render() {
     const { sorts, dataFormat } = this.state;

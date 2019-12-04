@@ -11,10 +11,8 @@ export default function Filter(props: { onChange: Function }) {
   const range2 = ["大于", "等于", "小于"];
 
   useEffect(() => {
-    if (numberString === "") return;
-
-    props.onChange([pickerType1, pickerType2, numberString]);
-  });
+    props.onChange([Number(pickerType1), Number(pickerType2), Number(numberString)]);
+  }, [pickerType1, pickerType2, numberString]);
 
   function clear() {
     setNumberString("");
