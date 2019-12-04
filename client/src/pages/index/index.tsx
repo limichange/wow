@@ -107,8 +107,33 @@ export default class Index extends Component<any, any> {
   }
 
   searchInputInput = e => {
-    const searchInput = e.detail.value;
-    let dataFormat = this.state.data.filter(item => item[0]);
+    this.searchInput = e.detail.value;
+
+    this.sortTable();
+  };
+
+  searchInput;
+
+  sortTable = () => {
+    const [type1, type2, number] = this.filterConfig;
+    const searchInput = this.searchInput;
+    let dataFormat = JSON.parse(JSON.stringify(this.state.data)).filter(
+      item => item[0]
+    );
+
+    if (number) {
+      dataFormat = dataFormat.filter(item => {
+        let value = item[type1 + 2];
+
+        if (type2 === 0) {
+          return value > number;
+        } else if (type2 === 1) {
+          return (value === number);
+        } else if (type2 === 2) {
+          return value < number;
+        }
+      });
+    }
 
     if (searchInput) {
       dataFormat = dataFormat.filter(item => {
@@ -125,29 +150,12 @@ export default class Index extends Component<any, any> {
     });
   };
 
+  filterConfig;
+
   filterOnChange = e => {
-    const [type1, type2, number] = e;
+    this.filterConfig = e;
 
-    console.log(type1, type2, number);
-    
-
-    if (!number) return;
-
-    const dataFormat = this.state.data.filter(item => {
-      let value = item[type1 + 2];
-
-      if (type2 === 0) {
-        return value > (number);
-      } else if (type2 === 1) {
-        return (value = (number));
-      } else if (type2 === 2) {
-        return value < (number);
-      }
-    });
-
-    this.setState({
-      dataFormat
-    })
+    this.sortTable();
   };
 
   render() {
