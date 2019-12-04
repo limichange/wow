@@ -1,5 +1,5 @@
 import { View, Picker, Input } from "@tarojs/components";
-import { useState } from "@tarojs/taro";
+import { useState, useEffect } from "@tarojs/taro";
 import "./index.scss";
 import RangePicker from "./RanagePicker";
 
@@ -8,6 +8,10 @@ export default function Filter() {
   const [pickerType2, setPickerType2] = useState(0);
   const range1 = ["EP", "GP", "PR"];
   const range2 = ["大于", "等于", "小于"];
+
+  useEffect(() => {
+    console.log(pickerType1, pickerType2)
+  })
 
   return (
     <View className="filter">
