@@ -56,54 +56,30 @@ export default class Index extends Component<any, any> {
   componentDidShow() {}
 
   updateSort = type => {
-    this.setState(prev => {
-      const oldStatus = prev.sorts[type];
-      const newStatus = {
-        EP: "",
-        GP: "",
-        PR: ""
-      };
+    const oldStatus = this.state.sorts[type];
+    const newStatus = {
+      EP: "",
+      GP: "",
+      PR: ""
+    };
 
-      if (oldStatus === "") newStatus[type] = "down";
-      else if (oldStatus === "down") newStatus[type] = "up";
-      else if (oldStatus === "up") newStatus[type] = "";
+    if (oldStatus === "") newStatus[type] = "down";
+    else if (oldStatus === "down") newStatus[type] = "up";
+    else if (oldStatus === "up") newStatus[type] = "";
 
-      return {
-        sorts: newStatus,
-        dataFormat: this.sortData(prev.data, newStatus)
-      };
+    this.newStatus = newStatus;
+
+    this.setState({
+      sorts: newStatus
     });
+
+    this.sortTable();
   };
+
+  newStatus;
 
   onShareAppMessage() {
     return {};
-  }
-
-  sortData(data, sorts) {
-    let index = -1;
-    let sortType = "";
-
-    if (sorts["EP"]) {
-      (index = 2), (sortType = sorts["EP"]);
-    }
-    if (sorts["GP"]) {
-      (index = 3), (sortType = sorts["GP"]);
-    }
-    if (sorts["PR"]) {
-      (index = 4), (sortType = sorts["PR"]);
-    }
-
-    if (index === -1) return data;
-
-    if (sortType === "up")
-      return data.sort((x, y) => {
-        return x[index] - y[index];
-      });
-
-    if (sortType === "down")
-      return data.sort((x, y) => {
-        return y[index] - x[index];
-      });
   }
 
   searchInputInput = e => {
@@ -128,7 +104,7 @@ export default class Index extends Component<any, any> {
         if (type2 === 0) {
           return value > number;
         } else if (type2 === 1) {
-          return (value === number);
+          return value === number;
         } else if (type2 === 2) {
           return value < number;
         }
@@ -143,6 +119,34 @@ export default class Index extends Component<any, any> {
             .indexOf(searchInput.toLocaleLowerCase()) !== -1
         );
       });
+    }
+
+    let index = -1;
+    let sortType = "";
+    let sorts = this.newStatus;
+
+    if (sorts) {
+      if (sorts["EP"]) {
+        (index = 2), (sortType = sorts["EP"]);
+      }
+      if (sorts["GP"]) {
+        (index = 3), (sortType = sorts["GP"]);
+      }
+      if (sorts["PR"]) {
+        (index = 4), (sortType = sorts["PR"]);
+      }
+
+      if (index !== -1) {
+        if (sortType === "up")
+          dataFormat.sort((x, y) => {
+            return x[index] - y[index];
+          });
+
+        if (sortType === "down")
+          dataFormat.sort((x, y) => {
+            return y[index] - x[index];
+          });
+      }
     }
 
     this.setState({
