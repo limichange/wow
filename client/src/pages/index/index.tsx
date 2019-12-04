@@ -2,6 +2,7 @@ import Taro, { Component, Config } from "@tarojs/taro";
 import { View, ScrollView, Input, Block, Picker } from "@tarojs/components";
 import "./index.scss";
 import Toggle from "./Toggle";
+import Filter from "./Filter";
 
 export default class Index extends Component<any, any> {
   config: Config = {
@@ -136,27 +137,7 @@ export default class Index extends Component<any, any> {
             className="searchInput"
           ></Input>
         </View>
-        <View className="filter">
-          <Picker
-            onChange={() => {}}
-            mode="selector"
-            value={0}
-            range={["EP", "GP", "PR"]}
-          >
-            EP
-          </Picker>
-          <Picker
-            onChange={() => {}}
-            mode="selector"
-            value={0}
-            range={["大于", "等于", "小于"]}
-          >
-            大于
-          </Picker>
-          <Input type="number"></Input>
-          
-          <View className="cancel">×</View>
-        </View>
+        <Filter></Filter>
         <ScrollView scrollX={true}>
           <View className="table">
             <View className="item header">
