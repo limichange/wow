@@ -1,5 +1,5 @@
 .table {
-  width: 750px;
+  width: 750px + 180px;
 
   .item {
     display: flex;
@@ -13,10 +13,17 @@
   }
 
   .job {
-    width: 160px;
+    width: 170px;
   }
-  
-  .EP, .GP, .PR, .priority {
+
+  .class {
+    width: 170px;
+  }
+
+  .EP,
+  .GP,
+  .PR,
+  .priority {
     width: 100px;
   }
 
@@ -25,8 +32,8 @@
   }
 
   .header {
-    background: #FAFAFA;
-    color: rgba(0,0,0,0.85);
+    background: #fafafa;
+    color: rgba(0, 0, 0, 0.85);
     font-weight: 500;
   }
 }
@@ -35,7 +42,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  background: #EFEFF4;
+  background: #efeff4;
 
   .searchInput {
     width: 100%;

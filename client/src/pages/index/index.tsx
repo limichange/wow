@@ -20,7 +20,8 @@ export default class Index extends Component<any, any> {
         EP: "",
         GP: "",
         PR: ""
-      }
+      },
+      type: 6
     };
   }
 
@@ -34,9 +35,19 @@ export default class Index extends Component<any, any> {
       .where({})
       .get({
         success: res => {
-          const data = res.data[0].data.roster.filter(
-            item => item.length === 5
-          );
+          const data = res.data[0].data.roster
+            .map(item => {
+              if (item.length === 5) {
+                item.splice(2, 0, "无");
+
+                this.setState({
+                  type: 5
+                });
+              }
+
+              return item;
+            })
+            .filter(item => item.length === 6);
 
           this.setState(
             {
@@ -99,7 +110,7 @@ export default class Index extends Component<any, any> {
 
     if (number) {
       dataFormat = dataFormat.filter(item => {
-        let value = item[type1 + 2];
+        let value = item[type1 + 3];
 
         if (type2 === 0) {
           return value > number;
@@ -127,13 +138,13 @@ export default class Index extends Component<any, any> {
 
     if (sorts) {
       if (sorts["EP"]) {
-        (index = 2), (sortType = sorts["EP"]);
+        (index = 3), (sortType = sorts["EP"]);
       }
       if (sorts["GP"]) {
-        (index = 3), (sortType = sorts["GP"]);
+        (index = 4), (sortType = sorts["GP"]);
       }
       if (sorts["PR"]) {
-        (index = 4), (sortType = sorts["PR"]);
+        (index = 5), (sortType = sorts["PR"]);
       }
 
       if (index !== -1) {
@@ -163,7 +174,7 @@ export default class Index extends Component<any, any> {
   };
 
   render() {
-    const { sorts, dataFormat } = this.state;
+    const { sorts, dataFormat, type } = this.state;
 
     return (
       <View className="index">
@@ -180,6 +191,7 @@ export default class Index extends Component<any, any> {
             <View className="item header">
               <View className="name">名字</View>
               <View className="job">职业</View>
+              {type === 6 && <View className="job">会阶</View>}
               <View onClick={() => this.updateSort("EP")} className="EP">
                 <Toggle type={sorts.EP}>EP</Toggle>
               </View>
@@ -195,9 +207,10 @@ export default class Index extends Component<any, any> {
                 <View key={index} className="item">
                   <View className="name">{item[0]}</View>
                   <View className="job">{item[1]}</View>
-                  <View className="EP">{item[2]}</View>
-                  <View className="GP">{item[3]}</View>
-                  <View className="PR">{item[4]}</View>
+                  {type === 6 && <View className="class">{item[2]}</View>}
+                  <View className="EP">{item[3]}</View>
+                  <View className="GP">{item[4]}</View>
+                  <View className="PR">{item[5]}</View>
                 </View>
               );
             })}
